@@ -1,9 +1,9 @@
 package tests;
 
+import io.qameta.allure.Attachment;
 import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
@@ -12,7 +12,6 @@ import java.util.concurrent.TimeUnit;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class TestListener implements ITestListener {
-
     public void onTestStart(ITestResult iTestResult) {
         System.out.println((String.format("======================================== STARTING TEST %s ========================================", iTestResult.getName())));
     }
@@ -33,17 +32,16 @@ public class TestListener implements ITestListener {
         takeScreenshot(iTestResult);
     }
 
+//    @Attachment (type = "/image.png")
     private byte[] takeScreenshot(ITestResult iTestResult) {
-        ITestContext context = iTestResult.getTestContext();
         try {
-            return ((TakesScreenshot)getWebDriver()).getScreenshotAs(OutputType.BYTES);
+            return ((TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.BYTES);
         } catch (NoSuchSessionException ex) {
             return null;
         } catch (IllegalStateException ex) {
             return null;
         }
     }
-
 
     private long getExecutionTime(ITestResult iTestResult) {
         return TimeUnit.MILLISECONDS.toSeconds(iTestResult.getEndMillis() - iTestResult.getStartMillis());

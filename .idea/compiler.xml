@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="MoodPanda" target="6" />
+      <module name="MoodPanda" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
